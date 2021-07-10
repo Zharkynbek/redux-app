@@ -1,40 +1,9 @@
-export const addContact = (contact) => {
-  localStorage.getItem("contacts") !== null
-    ? localStorage.setItem(
-        "contacts",
-        JSON.stringify([
-          ...JSON.parse(localStorage.getItem("contacts")),
-          contact,
-        ])
-      )
-    : localStorage.setItem("contacts", JSON.stringify([contact]));
-  return {
-    type: "phonebook/AddContact",
-    payload: contact,
-  };
-};
+import { createAction } from "@reduxjs/toolkit";
 
-export const handleFilterContacts = (e) => ({
-  type: "phonebook/FilterContact",
-  payload: e.target.value,
-});
+export const addContact = createAction("phonebook/AddContact");
 
-export const handleDeleteContacts = (id) => {
-  const contactsFromLocal = JSON.parse(localStorage.getItem("contacts"));
-  const contactsArrayWithoutDeletedContact = contactsFromLocal.filter(
-    (contact) => contact.id !== id
-  );
-  localStorage.setItem(
-    "contacts",
-    JSON.stringify(contactsArrayWithoutDeletedContact)
-  );
-  return {
-    type: "phonebook/DeleteContact",
-    payload: id,
-  };
-};
+export const handleFilterContacts = createAction("phonebook/FilterContact");
 
-export const updateContacts = (contacts) => ({
-  type: "phonebook/UpdateContacts",
-  payload: contacts,
-});
+export const handleDeleteContacts = createAction("phonebook/DeleteContact");
+
+export const updateContacts = createAction("phonebook/UpdateContacts");
