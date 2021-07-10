@@ -1,1 +1,1 @@
-# redux-app
+# goit-react-hw-03-phonebook

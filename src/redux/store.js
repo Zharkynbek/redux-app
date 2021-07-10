@@ -1,13 +1,7 @@
-import { createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import counterReducer from './counter/counter-reducer';
-import todosReducer from './todos/todos-reducer';
+import { createStore } from "redux";
+import { reducer } from "./reducer";
 
-const rootReducer = combineReducers({
-  counter: counterReducer,
-  todos: todosReducer,
-});
-
-const store = createStore(rootReducer, composeWithDevTools());
-
-export default store;
+export const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
