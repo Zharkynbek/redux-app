@@ -1,20 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../redux/phonebookActions";
 import filterContacts from "../../helpers/filterContacts";
 
-const PhonebookList = ({
-  filter,
-  contacts,
-  onDeleteContact,
-  onUpdateContacts,
-}) => {
+const PhonebookList = ({ filter, contacts, onDeleteContact }) => {
   const filteredContacts = filterContacts(contacts, filter);
-  useEffect(() => {
-    if (localStorage.getItem("contacts") !== null) {
-      onUpdateContacts(JSON.parse(localStorage.getItem("contacts")));
-    }
-  }, [onUpdateContacts]);
   return (
     <ul>
       {filteredContacts.map(({ name, number, id }) => (
@@ -30,15 +20,14 @@ const PhonebookList = ({
 
 const mapStateToProps = (state) => {
   return {
-    contacts: state.phonebook.contacts,
-    filter: state.phonebook.filter,
+    contacts: state.contacts,
+    filter: state.filter,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onDeleteContact: (id) => dispatch(actions.handleDeleteContacts(id)),
-    onUpdateContacts: (contacts) => dispatch(actions.updateContacts(contacts)),
   };
 };
 

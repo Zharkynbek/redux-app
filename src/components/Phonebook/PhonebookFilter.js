@@ -23,7 +23,7 @@ const PhonebookFilter = ({ filterValue, onFilterContact }) => {
 };
 
 const mapStateToProps = (state) => ({
-  filterValue: state.phonebook.filter,
+  filterValue: state.filter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
