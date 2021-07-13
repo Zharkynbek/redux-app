@@ -1,20 +1,23 @@
 import { createAction } from '@reduxjs/toolkit';
-import shortid from 'shortid';
 
-const addTodo = createAction('todos/add', text => {
-  return {
-    payload: {
-      id: shortid.generate(),
-      text,
-      completed: false,
-    },
-  };
-});
+export const fetchTodoRequest = createAction('todos/fetchTodoRequest');
+export const fetchTodoSuccess = createAction('todos/fetchTodoSuccess');
+export const fetchTodoError = createAction('todos/fetchTodoError');
 
-const deleteTodo = createAction('todos/delete');
+export const addTodoRequest = createAction('todos/addTodoRequest');
+export const addTodoSuccess = createAction('todos/addTodoSuccess');
+export const addTodoError = createAction('todos/addTodoError');
 
-const changeFilter = createAction('todos/changeFilter');
+export const deleteTodoRequest = createAction('todos/deleteTodoRequest');
+export const deleteTodoSuccess = createAction('todos/deleteTodoSuccess');
+export const deleteTodoError = createAction('todos/  deleteTodoError');
 
-const toggleCompleted = createAction('todos/toggleCompleted');
+export const toggleCompletedRequest = createAction(
+  'todos/toggleCompletedRequest',
+);
+export const toggleCompletedSuccess = createAction(
+  'todos/toggleCompletedSuccess',
+);
+export const toggleCompletedError = createAction('todos/toggleCompletedError');
 
-export default { addTodo, deleteTodo, changeFilter, toggleCompleted };
+export const changeFilter = createAction('todos/changeFilter');

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Container from '../components/Container';
 import TodoList from '../components/TodoList';
 import TodoEditor from '../components/TodoEditor';
@@ -7,6 +8,7 @@ import Stats from '../components/Stats';
 import Modal from '../components/Modal';
 import IconButton from '../components/IconButton';
 import { ReactComponent as AddIcon } from '../icons/add.svg';
+import todosOperations from '../redux/todos/todos-operations';
 
 const barStyles = {
   display: 'flex',
@@ -18,6 +20,10 @@ class TodosView extends Component {
   state = {
     showModal: false,
   };
+
+  componentDidMount() {
+    this.props.fetchTodos();
+  }
 
   toggleModal = () => {
     this.setState(({ showModal }) => ({
@@ -32,6 +38,7 @@ class TodosView extends Component {
 
     return (
       <Container>
+        {this.props.isLoadingTodos && <h1>Loaded...</h1>}
         <div style={barStyles}>
           <Filter />
           <Stats />
@@ -52,4 +59,12 @@ class TodosView extends Component {
   }
 }
 
-export default TodosView;
+const mapStateToProps = state => ({
+  isLoadingTodos: state.todos.loading,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchTodos: () => dispatch(todosOperations.fetchTodos()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodosView);
