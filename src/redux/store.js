@@ -10,8 +10,8 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
 import todosReducer from './todos/todos-reducer';
+import counterReducer from './counter';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -22,20 +22,13 @@ const middleware = [
   logger,
 ];
 
-// const todosPersistConfig = {
-//   key: 'todos',
-//   storage,
-//   blacklist: ['filter'],
-// };
-
 const store = configureStore({
   reducer: {
     todos: todosReducer,
+    counter: counterReducer,
   },
   middleware,
   devtools: process.env.NODE_ENV === 'development',
 });
-
-// const persistor = persistStore(store);
 
 export default store;
